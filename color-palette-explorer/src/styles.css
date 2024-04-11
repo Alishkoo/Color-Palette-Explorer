@@ -1,0 +1,115 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  :root{
+    --index: calc(1vw + 1vh);
+    --color-header: #f4efec;
+    --color-text: #cdc6c3;
+    --gallery-gap: calc(var(--index) * 10)
+  }
+  @font-face {
+    font-family: raleway-c;
+    src: url(../src/assets/fonts/outfit-regular.woff2);
+  }
+  h1,h2,h3,h4,h5,h6{
+    font-family: outfit-c;
+  }
+  
+  /*? will change */
+  .content , .hero, .main-header, .gallery > * {
+    will-change: transform;
+  }
+  
+  body {
+    background-image: url(../src/assets/img/bg.jpg);
+    background-size: 50px;
+    color: #fafafa;
+    font-family: raleway-c;
+    overflow: hidden-x;
+  }
+  
+  .hero{
+    width: calc(var(--index) * 36);
+    position: absolute;
+    left: 40vw;
+    top: 10vh;
+    z-index: -1;
+  }
+  
+  .main-header{
+    height: 100vh;
+  }
+  
+  .container {
+    padding: 0 7vw;
+  }
+  
+  .main-title{
+    font-size: calc(var(--index) * 8);
+    position: absolute;
+    width: min-content; /*? выравнивание по самому длинному слову*/
+    bottom: 12vh;
+    line-height: 0.9;
+  }
+  
+  .gallery{
+    display: flex;
+    padding: calc(var(--index) * 10) 0;
+  }
+  
+  /*? the first child of gallery */
+  .gallery > *{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .gallery__item{
+    max-width: calc(var(--index) * 21);
+    margin-bottom: var(--gallery-gap);
+    max-height: 90vh;
+    border-radius: 8px;
+  }
+  
+  .gallery__left{
+    margin-top: calc(var(--gallery-gap) * 1.75);
+  }
+  
+  .gallery__right .gallery__item{
+    margin: 0;
+    margin-top: calc(var(--gallery-gap));
+  }
+  
+  .text-block{
+    color: var(--color-text);
+    position: relative;
+  }
+  .text-block__h{
+    font-size: 4rem;
+    line-height: 2.4rem;
+    color: var(--color-header);
+    margin-bottom: 1.5rem;
+  }
+  .text-block__p{
+    line-height: 1.7rem;
+    font-size: 2rem;
+  }
+  .btn{
+    background-color: rgb(211, 211, 211);
+    font-family: raleway-c;
+    text-transform: uppercase;
+    color: rgb(49, 49, 49);
+    padding: 0.5rem 1rem;
+    border-radius: 16px;
+    margin-top: 1rem;
+    width: 150px;
+    transition: filter 0.5s ease;
+  }
+  .btn:hover {
+    filter: brightness(70%);
+    }

@@ -1,0 +1,17 @@
+<div class="palette">
+  <div class="container">
+    <h1>ChromaPalette</h1>
+    <div id="colorPalette">
+      <div *ngFor="let color of colors" class="colorBox" [style.background-color]="color" (click)="copyColor(color)">
+        <div class="colorText">{{ color }}</div>
+      </div>
+    </div>
+    <button id="generateButton" (click)="generatePalette()">Generate Palette</button>
+  </div>
+
+  <div class="buttons">
+    <button (click)="" id="saveButton">Save</button>
+    <button (click)="" id="logoutButton">Logout</button>
+  </div>
+</div>
+
