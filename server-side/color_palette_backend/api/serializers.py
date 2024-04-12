@@ -7,7 +7,7 @@ class ColorSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Colors
-        fields = ('hex_code_1', 'hex_code_2', 'hex_code_3', 'hex_code_4', 'hex_code_5')
+        fields = ('hex_code_1', 'hex_code_2', 'hex_code_3', 'hex_code_4', 'hex_code_5', 'user')
    
    
 class UserSerializer(serializers.ModelSerializer):

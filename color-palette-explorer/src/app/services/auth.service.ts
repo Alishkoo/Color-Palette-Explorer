@@ -5,6 +5,5 @@ import { UserGetInterface, UserInterface } from '../models/user.interface';
   providedIn: 'root'
 })
 export class AuthService {
-  currentUserSig = signal<UserInterface | undefined | null >(undefined)
+  currentUserSig = signal<UserInterface | undefined | null | UserGetInterface >(undefined)
 }
-// | UserGetInterface

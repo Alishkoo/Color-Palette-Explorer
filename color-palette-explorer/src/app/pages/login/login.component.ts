@@ -1,7 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserInterface } from '../../models/user.interface';
+import { UserGetInterface, UserInterface } from '../../models/user.interface';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -19,20 +19,20 @@ export class LoginComponent {
   router = inject(Router);
 
   form = this.fb.nonNullable.group({
-    email: ['', Validators.required],
+    username: ['', Validators.required],
     password: ['', Validators.required]
   });
 
   onSubmit(): void {
-    this.http.post<{ user: UserInterface }>('https://api.realworld.io/api/users/login', 
-    {
-      user: this.form.getRawValue(),
-    }
+    this.http.post<UserGetInterface>('http://127.0.0.1:8000/', 
+      this.form.getRawValue(),
     ).subscribe((response) => {
       console.log('responce', response);
-      localStorage.setItem('token', response.user.token);
-      this.authService.currentUserSig.set(response.user);
-      this.router.navigate(['/']);
+      localStorage.setItem('token', response.token.access);
+      this.authService.currentUserSig.set(response);
+      this.router.navigate(['/palette']);
     });
+
+
   }
 }

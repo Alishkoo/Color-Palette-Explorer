@@ -1,15 +1,17 @@
-<h1>Register</h1>
+
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div>
-    <input type="text" placeholder="Username" formControlName="username" />
+    <input type="text" placeholder="Имя пользователя" formControlName="username" />
   </div>
   <div>
-    <input type="text" placeholder="Email" formControlName="email" />
+    <input type="text" placeholder="Электронный адрес" formControlName="email" />
   </div>
   <div>
-    <input type="password" placeholder="Password" formControlName="password" />
+    <input type="password" placeholder="Пароль" formControlName="password" />
   </div>
   <div>
-    <button type="submit">Sign Up</button>
+    <button type="submit">Зарегистрироваться</button>
   </div>
-</form>
+  <p>Или если у вас уже есть аккаунт, <a routerLink="/login">Войти</a></p>
+  </form>
+

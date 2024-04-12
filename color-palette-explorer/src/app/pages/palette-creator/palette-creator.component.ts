@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { UserInterface } from '../../models/user.interface';
+import { Colors, UserGetInterface, UserInterface } from '../../models/user.interface';
 
 @Component({
   selector: 'app-palette-creator',
@@ -15,17 +15,22 @@ import { UserInterface } from '../../models/user.interface';
 export class PaletteCreatorComponent implements OnInit{
   authService = inject(AuthService);
   http = inject(HttpClient);
+  router = inject(Router);
 
   ngOnInit(): void {
     this.http
-      .get<{ user: UserInterface }>('https://api.realworld.io/api/user')
+      .get<Colors[]>('http://127.0.0.1:8000/api/colorslist/')
       .subscribe({
         next: (response) => {
           console.log('response', response);
-          this.authService.currentUserSig.set(response.user);
+          this.colors[0] = response[0].hex_code_1;
+          this.colors[1] = response[0].hex_code_2;
+          this.colors[2] = response[0].hex_code_3;
+          this.colors[3] = response[0].hex_code_4;
+          this.colors[4] = response[0].hex_code_5;
         },
         error: () => {
-          this.authService.currentUserSig.set(null);
+          this.generatePalette();
         },
       });
   }
@@ -34,12 +39,13 @@ export class PaletteCreatorComponent implements OnInit{
     console.log('logout');
     localStorage.setItem('token', '');
     this.authService.currentUserSig.set(null);
+    this.router.navigate(['/']);
   }
 
   colors: string[] = [];
 
   constructor() {
-    this.generatePalette();
+    // this.generatePalette();
   }
 
   getRandomColor(): string {
@@ -64,4 +70,26 @@ export class PaletteCreatorComponent implements OnInit{
       
     });
   }
+
+  save(): void {
+    this.http
+      .put<{message: string}>('http://127.0.0.1:8000//api/colorslist/', 
+      {
+        hex_code_1: this.colors[0],
+        hex_code_2: this.colors[1],
+        hex_code_3: this.colors[2],
+        hex_code_4: this.colors[3],
+        hex_code_5: this.colors[4]
+      })
+      .subscribe({
+        next: (response) => {
+          console.log('response', response);
+        },
+        // error: () => {
+        //   // this.authService.currentUserSig.set(null);
+        //   console.log('error');
+        // },
+      });
+  }
+
 }
